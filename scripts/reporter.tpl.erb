@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Dirvish Backup Report</title>
+  </head>
+
+  <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; text-align: center;">
+
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td>
+          <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td>
+                <h3>Expire Reports</h3>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" valign="top">
+                <table width="70%" border="0" cellpadding="0" cellspacing="20">
+                  <tr>
+                    <td>
+                      <table style="-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; max-width: 100%; width: 100%; border-collapse: collapse !important; border-spacing: 0;">
+                        <thead>
+                          <tr style="-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; page-break-inside: avoid;">
+                            <th style="color: #000 !important; text-shadow: none !important; -webkit-box-shadow: none !important; box-shadow: none !important; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; line-height: 1.42857143; border-top-width: 0; border-top-color: #ddd; border-top-style: solid; border-bottom-width: 2px; border-bottom-color: #ddd; border-bottom-style: solid; padding: 8px;" align="left" bgcolor="#fff" valign="bottom">
+                              Report
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <% @reports.each do |report| %>
+                            <tr style="-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; page-break-inside: avoid;">
+                              <td style="-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border-top-width: 1px; border-top-color: #ddd; border-top-style: solid; padding: 8px;">
+                                <pre><code><%= report %></code></pre>
+                              </td>
+                            </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td>
+                <h3>Backups Reports</h3>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" valign="top">
+                <table width="70%" border="0" cellpadding="0" cellspacing="20">
+                  <tr>
+                    <td>
+                      <table style="-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; max-width: 100%; width: 100%; border-collapse: collapse !important; border-spacing: 0;">
+                        <thead>
+                          <tr style="-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; page-break-inside: avoid;">
+                            <th style="color: #000 !important; text-shadow: none !important; -webkit-box-shadow: none !important; box-shadow: none !important; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; line-height: 1.42857143; border-top-width: 0; border-top-color: #ddd; border-top-style: solid; border-bottom-width: 2px; border-bottom-color: #ddd; border-bottom-style: solid; padding: 8px;" align="left" bgcolor="#fff" valign="bottom">
+                              Host
+                            </th>
+                            <th style="color: #000 !important; text-shadow: none !important; -webkit-box-shadow: none !important; box-shadow: none !important; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; line-height: 1.42857143; border-top-width: 0; border-top-color: #ddd; border-top-style: solid; border-bottom-width: 2px; border-bottom-color: #ddd; border-bottom-style: solid; padding: 8px;" align="left" bgcolor="#fff" valign="bottom">
+                              Tree
+                            </th>
+                            <th style="color: #000 !important; text-shadow: none !important; -webkit-box-shadow: none !important; box-shadow: none !important; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; line-height: 1.42857143; border-top-width: 0; border-top-color: #ddd; border-top-style: solid; border-bottom-width: 2px; border-bottom-color: #ddd; border-bottom-style: solid; padding: 8px;" align="left" bgcolor="#fff" valign="bottom">
+                              Date
+                            </th>
+                            <th style="color: #000 !important; text-shadow: none !important; -webkit-box-shadow: none !important; box-shadow: none !important; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; line-height: 1.42857143; border-top-width: 0; border-top-color: #ddd; border-top-style: solid; border-bottom-width: 2px; border-bottom-color: #ddd; border-bottom-style: solid; padding: 8px;" align="left" bgcolor="#fff" valign="bottom">
+                              State
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <% @backups.each do |backup| %>
+                            <tr style="-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; page-break-inside: avoid;">
+                              <td style="-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border-top-width: 1px; border-top-color: #ddd; border-top-style: solid; padding: 8px;">
+                                <%= backup['host'] %>
+                              </td>
+                              <td style="-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border-top-width: 1px; border-top-color: #ddd; border-top-style: solid; padding: 8px;">
+                                <pre><code><%= backup['tree'] %></code></pre>
+                              </td>
+                              <td style="-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border-top-width: 1px; border-top-color: #ddd; border-top-style: solid; padding: 8px;">
+                                <%= backup['date'] %>
+                              </td>
+                              <td style="-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border-top-width: 1px; border-top-color: #ddd; border-top-style: solid; padding: 8px;">
+                                <% color = backup['state'] == 'success' ? '#5cb85c' : '#d9534f' %>
+                                <span style="color: #fff !important; display: inline; font-size: 75%; font-weight: 700; line-height: 1; text-align: center; white-space: nowrap; vertical-align: baseline; border-radius: .25em; background-color: <%= color %>; padding: .2em .6em .3em;">
+                                  <%= backup['state'] %>
+                                </span>
+                              </td>
+                            </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</html>

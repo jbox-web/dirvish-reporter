@@ -1,0 +1,66 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'erb'
+require 'mail'
+
+# HTML Mail template path
+TEMPLATE = File.join(File.expand_path(__dir__), 'reporter.tpl.erb')
+
+# Define a template class that will hold our
+# template variables
+class MailTemplate
+  def initialize(vars = {})
+    vars.each do |k ,v|
+      instance_variable_set("@#{k}", v)
+    end
+  end
+
+  def get_binding
+    binding
+  end
+end
+
+
+########
+# Main #
+########
+
+# Define some variables
+reports = []
+backups = []
+
+# Get output of Dirvish script from STDIN
+dirvish_out = ARGF.read
+dirvish_out = dirvish_out.split("\n")
+
+# Then load and filter the output of the
+# Dirvish script :
+# If it's a JSON object it goes in the backups array
+# else it goes in the reports array
+dirvish_out.each do |line|
+  begin
+    backups << JSON.load(line)
+  rescue => e
+    reports << line
+  end
+end
+
+# Build our templated email message
+content  = MailTemplate.new(reports: reports, backups: backups)
+renderer = ERB.new(IO.read(TEMPLATE))
+message  = renderer.result(content.get_binding)
+
+# And send the email
+domain = %x[hostname -f]
+
+Mail.deliver do
+  from    "root@#{domain}"
+  to      "root@#{domain}"
+  subject 'Divish Backup Report'
+
+  html_part do
+    content_type 'text/html; charset=UTF-8'
+    body message
+  end
+end
